@@ -13,7 +13,7 @@ namespace TechJobsPersistentAutograded.Controllers
 {
     public class EmployerController : Controller
     {
-
+        //[HttpGet("/Add")]
         // GET: /<controller>/
         public IActionResult Index()
         {

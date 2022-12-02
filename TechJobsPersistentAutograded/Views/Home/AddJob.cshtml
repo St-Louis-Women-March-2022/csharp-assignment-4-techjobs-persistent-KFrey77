@@ -21,12 +21,41 @@
 
         <span></span>
        
-        <a>"Add Employer"</a>
+      </div>
 
+    <div class="form-group">
+        @if (JobSkill != null)
+        
+        @foreach (Skill skill in JobSkill)
+        {
+        <label>Skill</label>
+
+        <input class="form-control" />
+
+        <span></span>
+
+        <input type="checkbox" name="selectedSkills" value="@skill.Id" />
+   
+    
+    
+
+        }
     </div>
-
     <input type="submit" value="Add Job" />
 
+     
+
+    <div class="form-group">
+
+        <label>Employer</label>
+
+        <input class="form-control" />
+
+        <span></span>
+
+    </div>
+    
+    <a> <input type="submit" value="Add Employer" /></a>
 </form>
 
 

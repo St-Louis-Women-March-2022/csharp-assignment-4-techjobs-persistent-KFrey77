@@ -31,14 +31,14 @@ namespace TaskOne.Tests
             Boolean mysqlConnectionURL = mysqlConnectionString.Contains("server=localhost");
             Assert.True(mysqlConnectionURL, "Server is not localhost");
 
-            Boolean mySqlConnectionDatabase = mysqlConnectionString.Contains("database=techjobs");
-            Assert.True(mySqlConnectionDatabase, "Database is not named techjobs");
+            Boolean mySqlConnectionDatabase = mysqlConnectionString.Contains("database=techjobspersistent");
+            Assert.True(mySqlConnectionDatabase, "Database is not named techjobspersistent");
 
-            Boolean mySqlConnectionUsername = mysqlConnectionString.Contains("userid=techjobs");
-            Assert.True(mySqlConnectionUsername, "Username is not techjobs");
+            Boolean mySqlConnectionUsername = mysqlConnectionString.Contains("userid=techjobspersistent");
+            Assert.True(mySqlConnectionUsername, "Username is not techjobspersistent");
 
-            Boolean mySqlConnectionPassword = mysqlConnectionString.Contains("password=techjobs");
-            Assert.True(mySqlConnectionPassword, "Password is not techjobs");
+            Boolean mySqlConnectionPassword = mysqlConnectionString.Contains("password=Learn2Code!");
+            Assert.True(mySqlConnectionPassword, "Password is not Learn2Code!");
         }
     }
 }
