@@ -41,7 +41,7 @@ namespace TechJobsPersistentAutograded.Controllers
 
 
         [HttpGet("/Add")]
-        public IActionResult AddJob(List<Employer> employers, List<Skill> skills)
+        public IActionResult AddJob (AddJobViewModel addJobViewModel, List<Employer> employers, List<Skill> skills)
         {
            
 
@@ -55,7 +55,7 @@ namespace TechJobsPersistentAutograded.Controllers
             {
                 Name = addJobViewModel.Name;
                 Employer = addJobViewModel.EmployerId;
-                Skill = addJobViewModel.Skill;
+                Skill = addJobViewModel.Skills;
                 //Employer = employers
             };
            

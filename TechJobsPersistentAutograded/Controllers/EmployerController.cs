@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TechJobsPersistentAutograded.Data;
 using TechJobsPersistentAutograded.Models;
@@ -15,24 +16,66 @@ namespace TechJobsPersistentAutograded.Controllers
     {
         //[HttpGet("/Add")]
         // GET: /<controller>/
+
+        private JobRepository _repo;
+
+        public EmployerController(JobRepository repo)
+        {
+            _repo = repo;
+        }
+
+
         public IActionResult Index()
         {
+
+            IEnumerable<Employers> employers = _repo.GetAllEmployers();
+
+            return View(employers);
+
+            //return View();
+        }
+
+        public IActionResult Add(AddEmployerViewModel addEmployerViewModel)
+        {
+            //AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel(name, location);
+
+
+            Name name = new Name();
+            Location location = new Location();
+
+            return View(name, location);
+
+
+
+            Location = addEmployerViewModel.Location;
+
             return View();
         }
 
-        public IActionResult Add()
+        public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
-            return View();
-        }
 
-        public IActionResult ProcessAddEmployerForm()
-        {
-            return View();
+            if (ModelState.IsValid)
+            {
+                Employer employer = new Employer
+                {
+                    Name = addEmployerViewModel.Name;
+                Location = addEmployerViewModel.Location;
+            }
+        
+            return View("Add");
         }
 
         public IActionResult About(int id)
         {
-            return View();
+            Employer theEmployer = _repo.FindEmployerById(id);
+
+
+            AddEmployerViewModel viewModel = new AddEmployerViewModel(theEmployer);
+            return View(viewModel);
+
+
+            //return View();
         }
     }
 }
