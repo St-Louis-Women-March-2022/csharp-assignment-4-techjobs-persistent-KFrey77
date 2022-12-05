@@ -28,28 +28,24 @@ namespace TechJobsPersistentAutograded.Controllers
         public IActionResult Index()
         {
 
-            IEnumerable<Employers> employers = _repo.GetAllEmployers();
+            IEnumerable<Employer> employers = _repo.GetAllEmployers();
 
             return View(employers);
 
             //return View();
         }
 
-        public IActionResult Add(AddEmployerViewModel addEmployerViewModel)
+        public IActionResult Add()
         {
-            //AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel(name, location);
+            AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
 
 
-            Name name = new Name();
-            Location location = new Location();
+          /*  string name = "";
+            string location = "";
 
-            return View(name, location);
+            location = addEmployerViewModel.Location;*/
 
-
-
-            Location = addEmployerViewModel.Location;
-
-            return View();
+            return View(addEmployerViewModel);
         }
 
         public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
@@ -59,10 +55,16 @@ namespace TechJobsPersistentAutograded.Controllers
             {
                 Employer employer = new Employer
                 {
-                    Name = addEmployerViewModel.Name;
-                Location = addEmployerViewModel.Location;
+                    Name = addEmployerViewModel.Name,
+                    Location = addEmployerViewModel.Location
+                };
+                return Redirect("/Employer");
+            
             }
-        
+
+            Employers.Add(employer);
+            employer.SaveChanges();
+            
             return View("Add");
         }
 
@@ -71,7 +73,8 @@ namespace TechJobsPersistentAutograded.Controllers
             Employer theEmployer = _repo.FindEmployerById(id);
 
 
-            AddEmployerViewModel viewModel = new AddEmployerViewModel(theEmployer);
+
+            AddEmployerViewModel viewModel = new AddEmployerViewModel(theEmployer.Name, theEmployer.Location);
             return View(viewModel);
 
 

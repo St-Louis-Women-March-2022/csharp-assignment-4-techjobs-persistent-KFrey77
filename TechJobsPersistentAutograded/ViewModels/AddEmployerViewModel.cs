@@ -7,17 +7,22 @@ namespace TechJobsPersistentAutograded.ViewModels
     {
         public string Name { get; set; }
         public string Location { get; set; }
-    }
 
-    //public class AddEmployerViewModel
-    
+
+        //public class AddEmployerViewModel
+
+        public AddEmployerViewModel()
+        {
+
+        }
+
         public AddEmployerViewModel(string name, string location)
         {
             Name = name;
             Location = location;
         }
-            return View();    
-
+            //return View();
+    }
 }
 
     //(List<Employer> names, List<Skill> locations)
