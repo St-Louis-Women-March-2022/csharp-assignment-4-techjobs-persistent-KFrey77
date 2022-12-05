@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Xml.Linq;
 using TechJobsPersistentAutograded.Models;
 
 namespace TechJobsPersistentAutograded.ViewModels
@@ -13,7 +14,7 @@ namespace TechJobsPersistentAutograded.ViewModels
 
         public AddEmployerViewModel()
         {
-
+            
         }
 
         public AddEmployerViewModel(string name, string location)

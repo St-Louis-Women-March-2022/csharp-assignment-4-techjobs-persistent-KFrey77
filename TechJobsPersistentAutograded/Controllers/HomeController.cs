@@ -50,6 +50,7 @@ namespace TechJobsPersistentAutograded.Controllers
 
             var addJobViewModel = new AddJobViewModel(employers, skills);
 
+            
             /*return View(addJobViewModel);*/
 
             //Employer employer = DbContext.Employer.Find(addJobViewModel.EmployerId);
@@ -83,7 +84,8 @@ namespace TechJobsPersistentAutograded.Controllers
 
                 foreach (var skill in selectedSkills)
                 {
-                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Name == skill).FirstOrDefault();
+                    var Id = Int32.Parse(skill);
+                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Id == Id).FirstOrDefault();
                     JobSkill jobSkill = new JobSkill
                     {
                         JobId = job.Id,
@@ -96,10 +98,10 @@ namespace TechJobsPersistentAutograded.Controllers
                     _repo.AddNewJob(job);
 
                     _repo.SaveChanges();
-            }
-            
-           
-                return View("Add");
+                   
+                return Redirect("Index");
+            }   
+                return View("AddJob", addJobViewModel);
         }
 
 
