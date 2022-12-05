@@ -58,14 +58,15 @@ namespace TechJobsPersistentAutograded.Controllers
                     Name = addEmployerViewModel.Name,
                     Location = addEmployerViewModel.Location
                 };
+
+                _repo.AddNewEmployer(employer);
+                _repo.SaveChanges();
+
                 return Redirect("/Employer");
             
             }
 
-            Employers.Add(employer);
-            employer.SaveChanges();
-            
-            return View("Add");
+            return View("Add", addEmployerViewModel);
         }
 
         public IActionResult About(int id)

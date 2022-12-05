@@ -10,6 +10,8 @@ using TechJobsPersistentAutograded.ViewModels;
 using TechJobsPersistentAutograded.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace TechJobsPersistentAutograded.Controllers
 {
@@ -70,14 +72,34 @@ namespace TechJobsPersistentAutograded.Controllers
         {
             if (ModelState.IsValid)
             {
+                var jobCount = _repo.GetAllJobs().Count(); 
                 Job job = new Job
                 {
+                    Id = jobCount + 1,
                     Name = addJobViewModel.Name,
-                    EmployerId = addJobViewModel.EmployerId,
+                    EmployerId = addJobViewModel.EmployerId
                 };
-            }
+                var skillsTable = _repo.GetAllSkills();
 
-            return View("Add");
+                foreach (var skill in selectedSkills)
+                {
+                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Name == skill).FirstOrDefault();
+                    JobSkill jobSkill = new JobSkill
+                    {
+                        JobId = job.Id,
+                        SkillId = skillsTable2ElectricBoogaloo.Id,
+                        Skill = skillsTable2ElectricBoogaloo,
+                        Job = job
+                    };
+                    _repo.AddNewJobSkill(jobSkill);
+                }
+                    _repo.AddNewJob(job);
+
+                    _repo.SaveChanges();
+            }
+            
+           
+                return View("Add");
         }
 
 
