@@ -86,7 +86,7 @@ namespace TechJobsPersistentAutograded.Controllers
                 {
                    /* SkillId = Int32.Parse(skill);
                     var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Id == Id).FirstOrDefault();*/
-                    //var jobSkill = new JobSkill
+                   // var jobSkill = new JobSkill
                     {
                         JobSkill jobSkill = new JobSkill();
                         jobSkill.Job = job;
