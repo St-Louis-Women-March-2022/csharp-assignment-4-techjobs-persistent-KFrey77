@@ -73,10 +73,7 @@ namespace TechJobsPersistentAutograded.Controllers
         {
             Employer theEmployer = _repo.FindEmployerById(id);
 
-
-
-            AddEmployerViewModel viewModel = new AddEmployerViewModel(theEmployer.Name, theEmployer.Location);
-            return View(viewModel);
+            return View(theEmployer);
 
 
             //return View();
