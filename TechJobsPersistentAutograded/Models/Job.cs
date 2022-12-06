@@ -17,11 +17,13 @@ namespace TechJobsPersistentAutograded.Models
 
         public Job()
         {
+            JobSkills = new List<JobSkill>();
         }
 
         public Job(string name)
         {
             Name = name;
+            JobSkills = new List<JobSkill>();
         }
     }
 }

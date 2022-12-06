@@ -10,11 +10,20 @@ using TechJobsPersistentAutograded.ViewModels;
 using TechJobsPersistentAutograded.Data;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace TechJobsPersistentAutograded.Controllers
 {
 
     public class HomeController : Controller
+   /* public string Name { get; set; }
+    public int EmployerId { get; set; }
+
+    public List<SelectListItem> Employers { get; set; }
+
+    public List<SelectListItem> Skills { get; set; }*/
+   
 
     {
         private JobRepository _repo;
@@ -34,20 +43,70 @@ namespace TechJobsPersistentAutograded.Controllers
 
 
         [HttpGet("/Add")]
-        public IActionResult AddJob()
+        public IActionResult AddJob ()
         {
-            return View();
+            var employers = _repo.GetAllEmployers().ToList();
+            var skills = _repo.GetAllSkills().ToList();
+
+            var addJobViewModel = new AddJobViewModel(employers, skills);
+
+            
+            /*return View(addJobViewModel);*/
+
+            //Employer employer = DbContext.Employer.Find(addJobViewModel.EmployerId);
+            //Job newJob = new Job
+
+            
+               /* Name = addJobViewModel.Name,
+                Employer = addJobViewModel.EmployerId,
+                JobSkills = skills*/
+                //Employer = employers
+           
+           
+            //return View();
+            return View(addJobViewModel);
+
         }
 
 
-        public IActionResult ProcessAddJobForm()
+        public IActionResult ProcessAddJobForm(AddJobViewModel addJobViewModel, string[] selectedSkills)
         {
             if (ModelState.IsValid)
             {
-                return Redirect("Index");
-            }
+                //var jobCount = _repo.GetAllJobs().Count(); 
+                Job job = new Job
+                {
+                    Name = addJobViewModel.Name,
+                    EmployerId = addJobViewModel.EmployerId
+                };
+                //var skillsTable = _repo.GetAllSkills();
 
-            return View("Add");
+                if(selectedSkills != null)
+                foreach (var skill in selectedSkills)
+                {
+                   /* SkillId = Int32.Parse(skill);
+                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Id == Id).FirstOrDefault();*/
+                   // var jobSkill = new JobSkill
+                    {
+                        JobSkill jobSkill = new JobSkill();
+                        jobSkill.Job = job;
+                        jobSkill.SkillId = Convert.ToInt32(skill);
+                        job.JobSkills.Add(jobSkill);
+
+                       /* JobSkill jobSkill = new JobSkill();
+                        jobSkill.Job = processJob;
+                        jobSkill.SkillId = Convert.ToInt32(skill);
+                        processJob.JobSkills.Add(jobSkill);*/
+                };
+                    //_repo.AddNewJobSkill(jobSkill);
+                }
+                    _repo.AddNewJob(job);
+
+                    _repo.SaveChanges();
+                   
+                return Redirect("Index");
+            }   
+                return View("AddJob", addJobViewModel);
         }
 
 

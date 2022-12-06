@@ -1,20 +1,71 @@
-﻿<h1>Add a Job</h1>
+﻿@model TechJobsPersistentAutograded.ViewModels.AddJobViewModel
+
+
+<h1>Add a Job</h1>
 
 
 <form asp-controller="Home" asp-action="ProcessAddJobForm" method="post">
 
+
     <div class="form-group">
 
-        <label>Name</label>
+        <label asp-for="Name">Name</label>
+        <input class="form-control" asp-for="Name" required/>
+        <span asp-validation-for="Name"></span>
+
+        <span></span>
+
+    </div>
+    
+    <div class="form-group">
+
+        <label asp-for="EmployerId">Employer</label>
+        <select class ="form-control" asp-for="EmployerId" asp-items="@Model.Employers"></select>
+        <p><a asp-controller="Employer" asp-action="Add">Add Employer</a></p>
+        
+
+        @*<span></span>*@
+
+      @*  <div class="dropdown">
+            <button class="dropbtn">Dropdown</button>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>*@
+
+    </div>
+
+    <div class="form-group">
+        
+        <label>Skill</label>
+
+        @foreach(var skill in Model.Skills)
+        {
+            <label for="@skill.Id">@skill.Name</label>
+            <input type="checkbox" name="selectedSkills" value="@skill.Id" />
+        }
+        @*Might need to change name to reflect the model*@
+        <p><a asp-controller="Skill" asp-action="Add">Add Skill</a></p>
+       </div>
+        @*@if (Model.Name != null)*@
+        
+       <input type="submit" value="Add Job" />
+        
+     
+
+   @* <div class="form-group">
+
+        <label>Employer</label>
 
         <input class="form-control" />
 
         <span></span>
 
     </div>
-
-    <input type="submit" value="Add Job" />
-
+    
+    <a> <input type="submit" value="Add Employer" /></a>*@
 </form>
 
 

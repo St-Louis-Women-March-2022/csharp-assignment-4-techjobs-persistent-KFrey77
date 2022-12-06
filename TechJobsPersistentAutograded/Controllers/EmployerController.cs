@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TechJobsPersistentAutograded.Data;
 using TechJobsPersistentAutograded.Models;
@@ -13,26 +14,69 @@ namespace TechJobsPersistentAutograded.Controllers
 {
     public class EmployerController : Controller
     {
-
+        //[HttpGet("/Add")]
         // GET: /<controller>/
+
+        private JobRepository _repo;
+
+        public EmployerController(JobRepository repo)
+        {
+            _repo = repo;
+        }
+
+
         public IActionResult Index()
         {
-            return View();
+
+            IEnumerable<Employer> employers = _repo.GetAllEmployers();
+
+            return View(employers);
+
+            //return View();
         }
 
         public IActionResult Add()
         {
-            return View();
+            AddEmployerViewModel addEmployerViewModel = new AddEmployerViewModel();
+
+
+          /*  string name = "";
+            string location = "";
+
+            location = addEmployerViewModel.Location;*/
+
+            return View(addEmployerViewModel);
         }
 
-        public IActionResult ProcessAddEmployerForm()
+        public IActionResult ProcessAddEmployerForm(AddEmployerViewModel addEmployerViewModel)
         {
-            return View();
+
+            if (ModelState.IsValid)
+            {
+                Employer employer = new Employer
+                {
+                    Name = addEmployerViewModel.Name,
+                    Location = addEmployerViewModel.Location
+                };
+
+                _repo.AddNewEmployer(employer);
+                _repo.SaveChanges();
+
+                return Redirect("/Employer");
+            
+            }
+
+            return View("Add", addEmployerViewModel);
         }
 
         public IActionResult About(int id)
         {
-            return View();
+            Employer theEmployer = _repo.FindEmployerById(id);
+
+            return View(theEmployer);
+
+
+            //return View();
         }
     }
 }
