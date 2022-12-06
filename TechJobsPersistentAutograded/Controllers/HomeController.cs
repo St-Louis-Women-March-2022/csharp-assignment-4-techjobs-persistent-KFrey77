@@ -91,7 +91,7 @@ namespace TechJobsPersistentAutograded.Controllers
                         JobSkill jobSkill = new JobSkill();
                         jobSkill.Job = job;
                         jobSkill.SkillId = Convert.ToInt32(skill);
-                            //job.JobSkills.Add(jobSkill);
+                        job.JobSkills.Add(jobSkill);
 
                        /* JobSkill jobSkill = new JobSkill();
                         jobSkill.Job = processJob;

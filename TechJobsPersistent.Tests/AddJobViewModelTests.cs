@@ -20,7 +20,7 @@ namespace TaskTwo.Tests
             PropertyInfo[] infos = testAJVM.GetProperties();
 
             //assert
-            Assert.Equal(6, infos.Length);
+            Assert.Equal(5, infos.Length);
             //Should have Name, EmployerId, Employers, SkillId, & Skills
         }
 

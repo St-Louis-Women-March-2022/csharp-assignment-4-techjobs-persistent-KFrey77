@@ -13,7 +13,7 @@ namespace TechJobsPersistentAutograded.ViewModels
 
        // [Required(ErrorMessage = "Location is required.")]
        
-        public string Location { get; set; }
+        //public string Location { get; set; }
         
         public int EmployerId { get; set; }
 
