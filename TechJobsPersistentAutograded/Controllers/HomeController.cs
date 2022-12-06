@@ -73,27 +73,32 @@ namespace TechJobsPersistentAutograded.Controllers
         {
             if (ModelState.IsValid)
             {
-                var jobCount = _repo.GetAllJobs().Count(); 
+                //var jobCount = _repo.GetAllJobs().Count(); 
                 Job job = new Job
                 {
-                    Id = jobCount + 1,
                     Name = addJobViewModel.Name,
                     EmployerId = addJobViewModel.EmployerId
                 };
-                var skillsTable = _repo.GetAllSkills();
+                //var skillsTable = _repo.GetAllSkills();
 
+                if(selectedSkills != null)
                 foreach (var skill in selectedSkills)
                 {
-                    var Id = Int32.Parse(skill);
-                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Id == Id).FirstOrDefault();
-                    JobSkill jobSkill = new JobSkill
+                   /* SkillId = Int32.Parse(skill);
+                    var skillsTable2ElectricBoogaloo = skillsTable.Where(j => j.Id == Id).FirstOrDefault();*/
+                    //var jobSkill = new JobSkill
                     {
-                        JobId = job.Id,
-                        SkillId = skillsTable2ElectricBoogaloo.Id,
-                        Skill = skillsTable2ElectricBoogaloo,
-                        Job = job
-                    };
-                    _repo.AddNewJobSkill(jobSkill);
+                        JobSkill jobSkill = new JobSkill();
+                        jobSkill.Job = job;
+                        jobSkill.SkillId = Convert.ToInt32(skill);
+                            //job.JobSkills.Add(jobSkill);
+
+                       /* JobSkill jobSkill = new JobSkill();
+                        jobSkill.Job = processJob;
+                        jobSkill.SkillId = Convert.ToInt32(skill);
+                        processJob.JobSkills.Add(jobSkill);*/
+                };
+                    //_repo.AddNewJobSkill(jobSkill);
                 }
                     _repo.AddNewJob(job);
 

@@ -7,12 +7,12 @@ namespace TechJobsPersistentAutograded.ViewModels
 {
     public class AddJobViewModel
     {
-        [Required(ErrorMessage = "Job name is required.")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Name must be between 3 and 50 characters.")]
+       // [Required(ErrorMessage = "Job name is required.")]
+       
         public string Name { get; set; }
 
-        [Required(ErrorMessage = "Location is required.")]
-        [StringLength(50, MinimumLength = 3, ErrorMessage = "Location must be between 3 and 50 characters.")]
+       // [Required(ErrorMessage = "Location is required.")]
+       
         public string Location { get; set; }
         
         public int EmployerId { get; set; }
@@ -31,6 +31,7 @@ namespace TechJobsPersistentAutograded.ViewModels
         {
             Employers = new List<SelectListItem>();
             this.Skills = new List<Skill>();
+            //this.Skills = null;
 
             foreach (var employer in employers)
             {

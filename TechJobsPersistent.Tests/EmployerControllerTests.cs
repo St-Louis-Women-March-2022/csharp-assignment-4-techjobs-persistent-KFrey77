@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -108,7 +110,7 @@ namespace TaskTwo.Tests
             Assert.True(pInfo.Length > 0);
             Assert.Equal("addEmployerViewModel", pInfo[0].Name);
         }
-
+        #nullable enable
         [Fact]
         public void ProcessAddEmployerFormMethod_CreatesValidEmployerObjects()
         {

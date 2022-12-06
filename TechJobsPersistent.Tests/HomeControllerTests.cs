@@ -1,4 +1,6 @@
-﻿using System;
+﻿#nullable disable
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -68,7 +70,7 @@ namespace TaskTwo.Tests
             Assert.Equal("addJobViewModel", pi[0].Name);
             Assert.Equal("selectedSkills", pi[1].Name);
         }
-
+        #nullable enable
         [Fact]
         public void ProcessAddJobFormMethod_CreatesValidJobObjects()
         {
